@@ -33,7 +33,7 @@ function [mstruc,datstruc] = chpar( mstruc, datstruc )
 	   disp( '           7 - Main Menu   > ')
 
 	   choice = input(':  ');
-	   if length( choice ) == 0, choice = 7;, end
+	   if isempty( choice ), choice = 7; end
 
 	   switch choice
       case 1
@@ -44,25 +44,25 @@ function [mstruc,datstruc] = chpar( mstruc, datstruc )
          case 'N'
             s = sprintf( ' No Continuum ' );
             disp( s )
-            disp( sprintf( '\r\r') )
+             fprintf( '\r\r\n') 
          case 'P'
             s = sprintf(' Polynomial Continuum in Wavelength Space' );
             disp( s )
-            disp( sprintf( '\r\r') )
+             fprintf( '\r\r\n') 
          case 'Q'
             s = sprintf(' Polynomial Continuum in Wavenumber Space' );
             disp( s )
-            disp( sprintf( '\r\r') )
+             fprintf( '\r\r\n') 
          case 'G'
-            disp( sprintf(' Gaussian Continuum') )
-            disp( sprintf( '\r\r') )
+             fprintf(' Gaussian Continuum\n') 
+             fprintf( '\r\r\n') 
          case 'S'
             s = sprintf(' Straight line removed in Wavelength ');
             s = strcat( s, sprintf( '%7.1f\t%7.1f', ...
                mstruc.swav1, ...
                mstruc.swav2 ) );
             disp( s )
-            disp( sprintf( '\r\r') )
+             fprintf( '\r\r\n') 
 
          case 'T'
             s = sprintf(' Straight line removed in Wavenumber ');
@@ -70,21 +70,21 @@ function [mstruc,datstruc] = chpar( mstruc, datstruc )
                mstruc.swav1, ...
                mstruc.swav2 ) );
             disp( s )
-            disp( sprintf( '\r\r') )
+             fprintf( '\r\r\n') 
 		 otherwise
-            disp( sprintf( '\r\r') )
+             fprintf( '\r\r\n') 
          end
 
          disp( ' ' )
          ans = input( ' Enter new continuum type (N,P,Q,G,S,T): ','s' );
          ans = strtok(upper(ans));
 
-         if length( ans ) == 0
+         if isempty( ans )
             disp( 'WARNING - Not a valid choice!' )
          else
 
             vdx = strmatch( ans,validcont );
-            if length(vdx) == 0
+            if isempty(vdx)
                disp( 'WARNING - Not a valid choice!' )
             else
                mstruc.contyp = ans;
@@ -108,14 +108,14 @@ function [mstruc,datstruc] = chpar( mstruc, datstruc )
                mstruc.swav1, ...
                mstruc.swav2 ) );
             disp( s )
-            disp( sprintf( '\r\r') )
+             fprintf( '\r\r\n') 
          case 'T'
             s = sprintf(' Straight line removed in Wavenumber ');
             s = strcat( s, sprintf( '%7.1f\t%7.1f', ...
                mstruc.swav1, ...
                mstruc.swav2 ) );
             disp( s )
-            disp( sprintf( '\r\r') )
+             fprintf( '\r\r\n') 
          otherwise
 		end
 		p = zeros(4,1);
@@ -123,18 +123,18 @@ function [mstruc,datstruc] = chpar( mstruc, datstruc )
          p(k) = input( strcat('Enter continuum parameter P', ...
             num2str(k), sprintf(': ') ) );
 		end
-		if (mstruc.contyp == 'S') | (mstruc.contyp == 'T')
+		if (mstruc.contyp == 'S') || (mstruc.contyp == 'T')
 
          % STRAIGHT LINE REASSIGN
-			if p(1) ~= 0, mstruc.swav1 = p(1);, end
-			if p(2) ~= 0, mstruc.swav2 = p(2);, end
-		elseif (mstruc.contyp == 'P') | (mstruc.contyp == 'Q')
+			if p(1) ~= 0, mstruc.swav1 = p(1); end
+			if p(2) ~= 0, mstruc.swav2 = p(2); end
+		elseif (mstruc.contyp == 'P') || (mstruc.contyp == 'Q')
 
          % POLYNOMIAL REASSIGN
-			if p(1) ~= 0, mstruc.cparam(1) = p(1);, end
-			if p(2) ~= 0, mstruc.cparam(2) = p(2);, end
-			if p(3) ~= 0, mstruc.cparam(3) = p(3);, end
-			if p(4) ~= 0, mstruc.cparam(4) = p(4);, end
+			if p(1) ~= 0, mstruc.cparam(1) = p(1); end
+			if p(2) ~= 0, mstruc.cparam(2) = p(2); end
+			if p(3) ~= 0, mstruc.cparam(3) = p(3); end
+			if p(4) ~= 0, mstruc.cparam(4) = p(4); end
       end
 
       [mstruc, datstruc] = recalculate( mstruc, datstruc );
@@ -150,7 +150,7 @@ function [mstruc,datstruc] = chpar( mstruc, datstruc )
          k = 1;
       end      
 
-      if (k > 0) & (k <= mstruc.nbands)
+      if (k > 0) && (k <= mstruc.nbands)
          s1 = sprintf('  %2i  Center= %15.8e   ', k, mstruc.gcent(k));
          s2 = sprintf('FWHM= %15.8e   Str= %15.8e', ...
             mstruc.gfwhm(k), mstruc.gstr(k));
@@ -163,9 +163,9 @@ function [mstruc,datstruc] = chpar( mstruc, datstruc )
                names(kk,:), ': ') );
          end
 
-           if p(1) ~= 0, mstruc.gcent(k) = p(1);, end
-		   if p(2) ~= 0, mstruc.gfwhm(k) = p(2);, end
-		   if p(3) ~= 0, mstruc.gstr(k) = p(3);, end
+           if p(1) ~= 0, mstruc.gcent(k) = p(1); end
+		   if p(2) ~= 0, mstruc.gfwhm(k) = p(2); end
+		   if p(3) ~= 0, mstruc.gstr(k) = p(3); end
          [mstruc,datstruc] = recalculate( mstruc, datstruc );
       end
    case 4
@@ -204,7 +204,7 @@ function [mstruc,datstruc] = chpar( mstruc, datstruc )
          k = 1;
       end
 
-      if (k > 0) & (k <= mstruc.nbands)
+      if (k > 0) && (k <= mstruc.nbands)
          s1 = sprintf('  %2i  Center= %15.8e   ', k, mstruc.gcent(k));
          s2 = sprintf('FWHM= %15.8e   Str= %15.8e', ...
             mstruc.gfwhm(k), mstruc.gstr(k));         

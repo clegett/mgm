@@ -6,7 +6,7 @@ function storcurv2( mstruc, datstruc )
 
 	disp( ' ')
 	disp( ' ')
-	disp(sprintf('%s  ======  Log Base e Storage Routines  ======', itime))
+	fprintf('%s  ======  Log Base e Storage Routines  ======\n', itime)
 
 	head = input('  Enter Header for Data Files: ', 's' );
 

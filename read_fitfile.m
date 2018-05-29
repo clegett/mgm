@@ -104,7 +104,7 @@ for k = 1:ngauss
 end
 fclose( lun );
 
-if contyp == 'S' | contyp == 'T'
+if contyp == 'S' || contyp == 'T'
    sWav1 = cp(1);
    sWav2 = cp(2);
 else

@@ -17,8 +17,8 @@ function listpar( mstruc, datstruc )
 %	clc
 	idate = date;
 
-	disp( sprintf( '%s   =====  MGM-Fit Parameters  ===== ', idate ) )
-	disp( sprintf( '\r\r') )
+	 fprintf( '%s   =====  MGM-Fit Parameters  ===== \n', idate ) 
+	 fprintf( '\r\r\n') 
 %
 %	now dump out the current parameters
 %
@@ -29,59 +29,59 @@ function listpar( mstruc, datstruc )
 	   case 'N'
 		s = sprintf( ' No Continuum ' );
 		disp( s )
-		disp( sprintf( '\r\r') )
+		 fprintf( '\r\r\n') 
 	   case 'P'
 		s = sprintf(' Polynomial Continuum in Wavelength Space' );
 		disp( s )
-		disp( sprintf( '\r\r') )
+		 fprintf( '\r\r\n') 
 	   case 'Q'
 		s = sprintf(' Polynomial Continuum in Wavenumber Space' );
 		disp( s )
-		disp( sprintf( '\r\r') )
+		 fprintf( '\r\r\n') 
 	   case 'G'
-		disp( sprintf(' Gaussian Continuum') )
-		disp( sprintf( '\r\r') )
+		 fprintf(' Gaussian Continuum\n') 
+		 fprintf( '\r\r\n') 
 	   case 'S'
 		s = sprintf(' Straight line removed in Wavelength ');
 		s = strcat( s, sprintf( '%7.1f%7.1f', ...
 			 	        num2str(mstruc.swav1), '   ', ...
 			 	        num2str(mstruc.swav2) ) );
 		disp( s )
-		disp( sprintf( '\r\r') )
+		 fprintf( '\r\r\n') 
 	   case 'T'
 		s = sprintf(' Straight line removed in Wavenumber ');
 		s = strcat( s, sprintf( '%7.1f%7.1f', ...
 			 	        num2str(mstruc.swav1), '   ', ...
 			 	        num2str(mstruc.swav2) ) );
 		disp( s )
-		disp( sprintf( '\r\r') )
+		 fprintf( '\r\r\n') 
 	   otherwise
-		disp( sprintf( '\r\r') )
+		 fprintf( '\r\r\n') 
 	end
 
 	if (mstruc.contyp ~= 'N')
 	   s = sprintf( ' P0= %14.7e  P1= %14.7e  P2= %14.7e  P3= %14.7e', ...
 			mstruc.cparam );
 	   disp( s )
-	   disp( sprintf( '\r\r') )
+	    fprintf( '\r\r\n') 
 	end
 %
 %	now list bands
 %
-	disp( sprintf( '%4i Absorption Bands', mstruc.nbands ) )
-	disp( sprintf('\r') )
+	 fprintf( '%4i Absorption Bands\n', mstruc.nbands )
+	 fprintf('\r\n') 
    
 	for k = 1:mstruc.nbands
-	   disp( sprintf( '%2i  Center= %15.8e   FWHM= %15.8e   Str= %15.8e', ...
-		          k, mstruc.gcent(k), mstruc.gfwhm(k), mstruc.gstr(k) ) )
+	    fprintf( '%2i  Center= %15.8e   FWHM= %15.8e   Str= %15.8e\n', ...
+		          k, mstruc.gcent(k), mstruc.gfwhm(k), mstruc.gstr(k)) 
 	end
 %
 %	write error
 %
 	rmscur = rmserr( datstruc.fit, datstruc.ratio );
 
-	disp( sprintf( '\r\r') )
-	disp( sprintf( ' Current RMS Error %12.6e', rmscur ) )
+	 fprintf( '\r\r\n') 
+	 fprintf( ' Current RMS Error %12.6e\n', rmscur ) 
 
 	input(':')
 return

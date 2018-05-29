@@ -29,7 +29,7 @@ datstruc = get_data( mstruc.DATfile, mstruc.nbands );
 
 %	SET INITIAL ERROR LIMITS
 iresl = abs( datstruc.wavel(2) - datstruc.wavel(1) );
-if iresl < 1, iresl = 1;, end
+if iresl < 1, iresl = 1; end
 ifitres  = iresl;
 isampres = ifitres/iresl;   			     % CALCULATE FIT FREQUENCY
 rmsold   = rmserr( datstruc.fit, datstruc.ratio );
@@ -60,7 +60,7 @@ while DoAgain
    disp('          11-Stop ')
 
    choice = input(':  ');
-   if length( choice ) == 0, choice = 11;, end
+   if isempty( choice ), choice = 11; end
 
    switch choice
 
@@ -133,21 +133,20 @@ while DoAgain
 
       ifitres = input( ' Enter Fitting Resolution in Nanometers: ' );
 
-      if ifitres < 1, ifitres = iresl;, end
+      if ifitres < 1, ifitres = iresl; end
 
       isampres = fix( ifitres/iresl ) ;  		% CALCULATE FIT FREQUENCY
 
-      if isampres < 1, isampres = 1;, end
+      if isampres < 1, isampres = 1; end
 
    case 11						
 
       % Quit
 
-      if fitflag, dumpar(mstruc, datstruc);, end
+      if fitflag, dumpar(mstruc, datstruc); end
 
       DoAgain = 0;
    end	%switch statement%
 
 end  %while statement%
 return
-

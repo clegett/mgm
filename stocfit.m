@@ -45,17 +45,17 @@ while keepgoing == 1
 %
 %	   FIND OUT WHAT KIND OF DERIVATIVE WE NEED
 %
-	   switch ipart1;
+	   switch ipart1
 %
 %	   COMPUTE ALL THE PARTIALS 
 %
 	   case 4				% LINEAR OF POLYNOMIAL
 		G(:,k) = 1.0 ./ exp( datstruc.cont(ddx) );
 	   case 5				% X TERM OF POLYNOMIAL
-		if (mstruc.contyp == 'Q') | ...
+		if (mstruc.contyp == 'Q') || ...
 		   (mstruc.contyp == 'T')
 			value = datstruc.waven(ddx);
-		elseif (mstruc.contyp == 'P') | ...
+		elseif (mstruc.contyp == 'P') || ...
 		       (mstruc.contyp == 'S')
 			value = datstruc.wavel(ddx);
 		else
@@ -63,10 +63,10 @@ while keepgoing == 1
 		end
 		G(:,k) = value ./ exp( datstruc.cont(ddx) );
 	   case 6				% X SQUARED TERM OF POLYNOMIAL
-		if (mstruc.contyp == 'Q') | ...
+		if (mstruc.contyp == 'Q') || ...
 		   (mstruc.contyp == 'T')
 			value = datstruc.waven(ddx);
-		elseif (mstruc.contyp == 'P') | ...
+		elseif (mstruc.contyp == 'P') || ...
 		       (mstruc.contyp == 'S')
 			value = datstruc.wavel(ddx);
 		else
@@ -74,10 +74,10 @@ while keepgoing == 1
 		end
 		G(:,k) = (value .* value ) ./ exp( datstruc.cont(ddx) );
 	   case 7				% X CUBED TERM OF POLYNOMIAL
-		if (mstruc.contyp == 'Q') | ...
+		if (mstruc.contyp == 'Q') || ...
 		   (mstruc.contyp == 'T')
 			value = datstruc.waven(ddx); 
-		elseif (mstruc.contyp == 'P') | ...
+		elseif (mstruc.contyp == 'P') || ...
 		       (mstruc.contyp == 'S')
 			value = datstruc.wavel(ddx);
 		else
@@ -91,7 +91,7 @@ while keepgoing == 1
 %		Set up an array to identify which band we're working on...
 %
 		pdx = zeros( mstruc.nbands,3 );
-		for b = 1:mstruc.nbands;
+		for b = 1:mstruc.nbands
 		    pdx( b,:) = b;
 		end
 
@@ -239,7 +239,7 @@ function [mstruc,datstruc,keepgoing,ITR] = error_check ( mstruc, ...
 	pdx = reshape( [1:3*mstruc.nbands], mstruc.nbands, 3 );
 	nnn = find( mstruc.params( pdx(:,1) ) < 0 );
 
-	if length(nnn) > 0
+	if ~isempty(nnn)
 	   	for jj = 1:length(nnn)
 		   s =sprintf( '  Band #%3i has a negative width !!!', nnn(jj) );
 		   disp( s )
@@ -252,7 +252,7 @@ function [mstruc,datstruc,keepgoing,ITR] = error_check ( mstruc, ...
 %
 	nnn = find( mstruc.params( pdx(:,3) ) > 0 );
 
-	if length(nnn) > 0
+	if ~isempty(nnn)
 	   for jj = 1:length(nnn)
 		s =sprintf( '  Band #%3i has a positive strength !!!', nnn(jj) );
 		disp( s )

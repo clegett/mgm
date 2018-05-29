@@ -40,7 +40,7 @@ function mstruc = lockup( mstruc )
 	   disp( '          14 - Exit       > ')
 
 	   choice = input(':  ');
-	   if length( choice ) == 0
+	   if isempty( choice )
 		choice = 14;
 	   end
 	
@@ -74,13 +74,13 @@ function mstruc = lockup( mstruc )
 
 		while reprompt == 1
 		    nband = mstruc.nbands;
-		    disp( sprintf('  Centers are    1 - %2i', nband) )
-		    disp( sprintf('  Widths  are   %2i - %2i', ...
-				  nband+1, 2*nband) )
-		    disp( sprintf('  Strengths are %2i - %2i', ...
-				  2*nband+1,3*nband) )
-		    disp( sprintf('  CpN   is      %2i - %2i', ...
-				  3*nband+1, mstruc.nparam) )
+		     fprintf('  Centers are    1 - %2i\n', nband) 
+		     fprintf('  Widths  are   %2i - %2i\n', ...
+				  nband+1, 2*nband) 
+		     fprintf('  Strengths are %2i - %2i\n', ...
+				  2*nband+1,3*nband) 
+		     fprintf('  CpN   is      %2i - %2i\n', ...
+				  3*nband+1, mstruc.nparam)
 
 		    ipar = input(' Enter Parameter ID: ')
 
@@ -90,7 +90,7 @@ function mstruc = lockup( mstruc )
 			reprompt = 0;
 		    end
 		end   % while %
-		if (ipar >= 1) & (ipar <= mstruc.nparam)
+		if (ipar >= 1) && (ipar <= mstruc.nparam)
 		    mstruc.ipstat(ipar,1) = 1;
 		end
 	  case 10			% unlock an individual parameter
@@ -99,12 +99,12 @@ function mstruc = lockup( mstruc )
 		while reprompt == 1
 		    nband = mstruc.nbands;
 		    disp( strcat('  Centers are    1 - ', num2str(nband)) )
-		    disp( sprintf('  Widths  are   %2i - %2i', ...
-				  nband+1, 2*nband) )
-		    disp( sprintf('  Strengths are %2i - %2i', ...
-				  2*nband+1,3*nband) )
-		    disp( sprintf('  CpN   is      %2i - %2i', ...
-				  3*nband+1, mstruc.nparam) )
+		     fprintf('  Widths  are   %2i - %2i\n', ...
+				  nband+1, 2*nband) 
+		     fprintf('  Strengths are %2i - %2i\n', ...
+				  2*nband+1,3*nband) 
+		     fprintf('  CpN   is      %2i - %2i\n', ...
+				  3*nband+1, mstruc.nparam)
 
 		    ipar = input(' Enter Parameter ID: ');
 
@@ -114,7 +114,7 @@ function mstruc = lockup( mstruc )
 			reprompt = 0;
 		    end
 		end   % while %
-		if (ipar >= 1) & (ipar <= mstruc.nparam)
+		if (ipar >= 1) && (ipar <= mstruc.nparam)
 		    mstruc.ipstat(ipar,1) = 0;
 		end
 	  case 11			% lock an absorption
@@ -129,7 +129,7 @@ function mstruc = lockup( mstruc )
 			reprompt = 0;
 		    end
 		end
-		if (ipar >= 1) & (ipar <= mstruc.nbands)
+		if (ipar >= 1) && (ipar <= mstruc.nbands)
 		    pdx = reshape( [1:3*mstruc.nbands], mstruc.nbands,3 );
 		    mstruc.ipstat( pdx(ipar,:),1 ) = 1;
 		end
@@ -145,7 +145,7 @@ function mstruc = lockup( mstruc )
 			reprompt = 0;
 		    end
 		end
-		if (ipar >= 1) & (ipar <= mstruc.nbands)
+		if (ipar >= 1) && (ipar <= mstruc.nbands)
 		    pdx = reshape( [1:3*mstruc.nbands], mstruc.nbands,3 );
 		    mstruc.ipstat( pdx(ipar,:),1 ) = 0;
 		end

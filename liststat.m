@@ -17,17 +17,17 @@ function liststat(mstruc)
 %	clc
 	idate = date;
 
-	disp( sprintf( '%s     =====  Parameter Status  =====', idate ) )
+	 fprintf( '%s     =====  Parameter Status  =====\n', idate ) 
 %
 %	now dump out the current parameters
 %
 %	now list bands
 %
-	disp( sprintf( '\r\r' ) )
-	disp( sprintf( '                             Absorption Bands' ) )
-	disp( sprintf( '\r' ) )
+	 fprintf( '\r\r\n' ) 
+	 fprintf( '                             Absorption Bands\n' ) 
+	 fprintf( '\r\n' ) 
 	disp( '    #            Center         FWHM            Strength' )
-	disp( sprintf( '\r' ) )
+	 fprintf( '\r\n' ) 
 
 	x      = 1:3*mstruc.nbands;
 	pdx    = reshape( x, mstruc.nbands, 3 );
@@ -47,7 +47,7 @@ function liststat(mstruc)
 	   disp( [sprintf('  %3i + ', k), '        ', value] );
 
 	end
-	disp( sprintf('\r\r') )
+	 fprintf('\r\r\n') 
 %
 %	write error
 %
@@ -64,7 +64,7 @@ function liststat(mstruc)
 		       '              C2', ...
 		       '              C3' );
 	   disp( s )
-	   disp( sprintf( '\r' ) )
+	    fprintf( '\r\n' ) 
 
 	   tmp = char( setpar );
 	   value = strcat( sprintf( '%s\t', tmp(1,:) ), ...

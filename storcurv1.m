@@ -4,7 +4,7 @@ function storcurv1( mstruc, datstruc )
 
 	disp( ' ')
 	disp( ' ')
-	disp(sprintf('%s  ======  Reflectance Storage Routines  ======', itime))
+	fprintf('%s  ======  Reflectance Storage Routines  ======\n', itime)
 
 	head = input('  Enter Header for Data Files: ', 's' );
 

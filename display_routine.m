@@ -30,7 +30,7 @@ function display_routine( mstruc, datstruc )
 %	   clc
 	   yesps = 0;
 
-	   disp(sprintf('%s   =====  MGM-FIT  Display Routines =====', idate))
+	   fprintf('%s   =====  MGM-FIT  Display Routines =====\n', idate)
 %
 %	   write menu
 %
@@ -61,19 +61,19 @@ function display_routine( mstruc, datstruc )
 		xtype = 2;
 	   case 3
 	   	xmin = input( 'Enter Wavelength/Wavenumber MINIMUM: ' );
-		if length( xmin ) > 0
+		if ~isempty( xmin )
 			XR(1+xtype) = xmin;
 		end
 		xmax = input( 'Enter Wavelength/Wavenumber MAXIMUM: ' );
-		if length( xmax ) > 0
+		if ~isempty( xmax )
 			XR(2+xtype) = xmax;
 		end
 	   	ymin = input( 'Enter Log Reflectance MINIMUM: ' );
-		if length( ymin ) > 0
+		if ~isempty( ymin )
 			YR(1) = ymin;
 		end
 		ymax = input( 'Enter Log Reflectance MAXIMUM: ' );
-		if length( ymax ) > 0
+		if ~isempty( ymax )
 			YR(2) = ymax;
 		end
 	   case 4
@@ -85,7 +85,7 @@ function display_routine( mstruc, datstruc )
 	   	disp( '   F(it),C(ontinuum),E(Spec-Fit),A(All of them) ')
 
 		answers = input(': ', 's' )
-		if length( answers ) == 0
+		if isempty( answers )
 		    answers = 'A';
 		else
 		    answers = upper(answers);
